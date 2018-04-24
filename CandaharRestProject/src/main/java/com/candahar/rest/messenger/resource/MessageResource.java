@@ -16,34 +16,30 @@ import com.candahar.rest.messenger.model.Message;
 import com.candahar.rest.messenger.service.MessageService;;
 
 @Path("/messages")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class MessageResource {
 	
 	MessageService messageService = new MessageService();
 	
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
 	public List<Message> getAllMessage() throws Exception {
 		return messageService.getAllMessage();
 	}
 
 	@GET
 	@Path("/{messageId}")
-	@Produces(MediaType.APPLICATION_JSON)
 	public Message getMessage(@PathParam("messageId") int messageId) throws Exception {
 		return messageService.getMessage(messageId);
 	}
 	
 	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	public Message addMessage(Message message) throws Exception {
 		return messageService.addMessage(message);
 	}
 	
 	@PUT
 	@Path("/{messageId}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	public Message updateMessage(@PathParam("messageId") int messageId, Message message) throws Exception {
 		message.setId(messageId);
 		return messageService.updateMessage(message);
@@ -51,7 +47,6 @@ public class MessageResource {
 	
 	@DELETE
 	@Path("/{messageId}")
-	@Produces(MediaType.APPLICATION_JSON)
 	public void deleteMessage(@PathParam("messageId") int messageId) throws Exception {
 		messageService.deleteMessage(messageId);
 	}
